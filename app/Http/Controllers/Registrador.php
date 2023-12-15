@@ -8,6 +8,7 @@ use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\DB;
 
 class Registrador extends Controller
 {
@@ -71,7 +72,7 @@ class Registrador extends Controller
             if (Auth::attempt($credentials)) {
                 $request->session()->regenerate();
      
-                return redirect()->intended('inicio');
+                return redirect()->intended('servicios');
             }
 
             return back()->withErrors([
@@ -82,5 +83,38 @@ class Registrador extends Controller
             return redirect()->back()->withErrors($e->getMessage());
         }
 
+    }
+
+    public function servicios(){
+        return view('servicios');
+    }
+
+    public function registro(Request $request, $id){
+
+        $user = User::find($id);
+        $colaborador = Colaborador::where('user_id','=',$user->id)->get();
+        $colaboradores = $colaborador->first();
+
+        $x = Colaborador::find($colaboradores->id);
+
+        $x->servicios()->attach($request->input('servicios'));
+
+        return redirect('/etiquetas');
+    }
+
+    public function etiquetas(){
+        return view('etiquetas');
+    }
+
+    public function registro_etiquetas(Request $request, $id){
+        $user = User::find($id);
+        $colaborador = Colaborador::where('user_id','=',$user->id)->get();
+        $colaboradores = $colaborador->first();
+
+        $x = Colaborador::find($colaboradores->id);
+
+        $x->etiquetas()->attach($request->input('etiquetas'));
+
+        return redirect('/inicio');
     }
 }

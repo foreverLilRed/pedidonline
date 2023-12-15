@@ -19,6 +19,10 @@ export default {
             colors: {
                 'compusistel-azul': '#003DA6'
             },
+            borderRadius: {
+                'xxl' : '0.8rem',
+                'uxl' : '2rem',
+            }
         },
     },
 

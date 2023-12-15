@@ -1,3 +1,4 @@
+<!--PLANTILLA PRINCIPAL-->
 <!DOCTYPE html>
 <html lang="{{ str_replace('_', '-', app()->getLocale()) }}">
     <head>
@@ -17,7 +18,7 @@
         <!-- Styles -->
         @livewireStyles
     </head>
-    <body class="font-sans antialiased">
+    <body class="font-sans antialiased static">
         <x-banner />
 
         <div class="min-h-screen bg-gray-100">
@@ -36,10 +37,15 @@
             <main>
                 {{ $slot }}
             </main>
+
         </div>
 
         @stack('modals')
 
         @livewireScripts
     </body>
+    
+    <div class="absolute bottom-0 right-0">
+        @livewire('Notificaciones')
+    </div>
 </html>

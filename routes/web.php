@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\Registrador;
+use App\Http\Controllers\ServiciosController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -21,6 +22,34 @@ Route::get('/', function () {
 Route::controller(Registrador::class)->group(function () {
     Route::post('/register-cliente', 'cliente')->name('register-cliente');
     Route::post('/register-colaborador', 'colaborador')->name('register-colaborador');
+    Route::get('/servicios', 'servicios')->name('servicios')->middleware([
+        'auth:sanctum',
+        config('jetstream.auth_session'),
+        'verified',
+    ]);
+    Route::post('/registro/{id}', 'registro')->name('registro')->middleware([
+        'auth:sanctum',
+        config('jetstream.auth_session'),
+        'verified',
+    ]);
+    Route::get('/etiquetas', 'etiquetas')->name('etiquetas')->middleware([
+        'auth:sanctum',
+        config('jetstream.auth_session'),
+        'verified',
+    ]);
+    Route::post('/registro-etiquetas/{id}', 'registro_etiquetas')->name('registro-etiquetas')->middleware([
+        'auth:sanctum',
+        config('jetstream.auth_session'),
+        'verified',
+    ]);
+});
+
+Route::controller(ServiciosController::class)->group(function () {
+    Route::get('/servicio/{id}', 'mostrarServicio')->name('servicio')->middleware([
+        'auth:sanctum',
+        config('jetstream.auth_session'),
+        'verified',
+    ]);
 });
 
 Route::middleware([

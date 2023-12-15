@@ -12,7 +12,7 @@
         @foreach ($etiquetas as $etiqueta)
             <span class="flex items-center bg-purple-100 text-purple-800 text-sm font-bold me-2 my-1 px-2.5 py-0.5 rounded-full dark:bg-purple-900 dark:text-purple-300 hover:bg-purple-300">
                 {{$etiqueta->nombre}}
-                <div wire:click='eliminar({{$etiqueta->id}})' class="ml-1 rounded-full hover:bg-red-500 p-0.5 hover:border border-black">
+                <div wire:click='eliminar({{$etiqueta->id}})' class="ml-1 rounded-full hover:bg-red-500 p-0.5 hover:cursor-pointer border-black">
                     <svg xmlns="http://www.w3.org/2000/svg" width="10" height="10" viewBox="0 0 256 256"><path fill="#000000" d="M208.49 191.51a12 12 0 0 1-17 17L128 145l-63.51 63.49a12 12 0 0 1-17-17L111 128L47.51 64.49a12 12 0 0 1 17-17L128 111l63.51-63.52a12 12 0 0 1 17 17L145 128Z"/></svg>
                 </div>
             </span>
