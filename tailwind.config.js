@@ -22,6 +22,12 @@ export default {
             borderRadius: {
                 'xxl' : '0.8rem',
                 'uxl' : '2rem',
+            },
+            fontWeight: {
+                estadistica: '1000',
+            },
+            scale: {
+                '110': '1,10',
             }
         },
     },

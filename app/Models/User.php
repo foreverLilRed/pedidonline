@@ -67,6 +67,6 @@ class User extends Authenticatable
 
     public function colaborador(): HasOne
     {
-        return $this->hasOne(Cliente::class);
+        return $this->hasOne(Colaborador::class);
     }
 }

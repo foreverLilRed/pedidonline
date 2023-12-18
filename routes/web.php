@@ -50,6 +50,11 @@ Route::controller(ServiciosController::class)->group(function () {
         config('jetstream.auth_session'),
         'verified',
     ]);
+    Route::get('/colaborador/{nombre}', 'mostrarColaborador')->name('mostrar-colaborador')->middleware([
+        'auth:sanctum',
+        config('jetstream.auth_session'),
+        'verified',
+    ]);
 });
 
 Route::middleware([
