@@ -15,14 +15,19 @@ class BuscarColecciones extends Component
     public $id;
 
     public $servicio, $listaColaboradores;
+    public $filtro = '';
 
     public function mount(){
         $this->servicio = TipoServicio::find($this->id);
         $this->listaColaboradores = $this->servicio->colaboradores;
     }
 
-    public function calificacion(){
-        $this->listaColaboradores = DB::table('colaboradores')->orderBy('calificacion','asc');
+    public function actualizarFiltro(){
+        if($this->filtro == 'calificacion'){
+            $this->servicio = TipoServicio::find($this->id);
+            $this->listaColaboradores = $this->servicio->colaboradores->orderByDesc('calificacion')->get();
+            dd($this->listaColaboradores);
+        }
     }
 
     public function tiempo(){

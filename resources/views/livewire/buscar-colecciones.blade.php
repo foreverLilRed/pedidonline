@@ -1,15 +1,5 @@
 <div>
-    <div class="flex justify-center items-center h-10 gap-3 my-3">
-        <p class="text-center tracking-tight text-gray-500 md:text-lg dark:text-gray-400">
-            Ordenar por: 
-        </p>
-        <select id="countries" class="bg-gray-50 w-30 h-10 border border-gray-300 text-gray-900 text-sm rounded-full focus:ring-blue-500 focus:border-blue-500 block p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
-            <option selected disabled class="text-center">---</option>
-            <option wire:click="calificacion">Calificacion</option>
-            <option wire:click="servicios">Servicios realizados</option>
-            <option wire:click="tiempo">Tiempo de servicio</option>
-        </select>
-    </div>
+
     <div class="grid grid-cols-4 gap-5">
         @foreach ($listaColaboradores as $colaborador)
             <div class="w-full max-w-sm bg-white border rounded-uxl shadow-lg dark:bg-gray-800 dark:border-gray-700 transition-transform duration-300 ease-in-out">

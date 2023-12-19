@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\Registrador;
+use App\Http\Controllers\Requerimientos;
 use App\Http\Controllers\ServiciosController;
 use Illuminate\Support\Facades\Route;
 
@@ -55,6 +56,16 @@ Route::controller(ServiciosController::class)->group(function () {
         config('jetstream.auth_session'),
         'verified',
     ]);
+    Route::get('/requerimiento/{id}', 'generarRequerimiento')->middleware([
+        'auth:sanctum',
+        config('jetstream.auth_session'),
+        'verified',
+    ]);
+    Route::post('/crear-requerimiento', 'crearRequerimiento')->name('crear-requerimiento')->middleware([
+        'auth:sanctum',
+        config('jetstream.auth_session'),
+        'verified',
+    ]);
 });
 
 Route::middleware([
@@ -71,4 +82,5 @@ Route::middleware([
     Route::get('/inicio', function () {
         return view('inicio');
     })->name('inicio');
+    Route::get('/requerimientos',[Requerimientos::class,'listarRequerimientos'])->name('requerimientos');
 });

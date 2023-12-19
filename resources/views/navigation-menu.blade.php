@@ -20,6 +20,9 @@
                     <x-nav-link href="{{ route('inicio') }}" :active="request()->routeIs('inicio')">
                         {{ __('Inicio') }}
                     </x-nav-link>
+                    <x-nav-link href="{{ route('requerimientos') }}" :active="request()->routeIs('requerimientos')">
+                        {{ __('Requerimientos') }}
+                    </x-nav-link>
                 </div>
             </div>
 

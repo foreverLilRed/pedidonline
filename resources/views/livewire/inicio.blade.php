@@ -33,12 +33,14 @@
                             <br>
                             <b>Hay {{$cantidad}} personas que ofrecen este servicio!</b>
                         </p>
-                        <div class="flex flex-col space-y-4 sm:flex-row sm:space-y-0">
+                        <div class="flex flex-col space-y-4 sm:flex-row sm:space-y-0 gap-x-4">
                             <a href="/servicio/{{Crypt::encrypt($tipo_servicio->id)}}" class="inline-flex justify-center items-center py-3 px-5 text-base font-medium text-center text-white rounded-lg bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 dark:focus:ring-blue-900">
-                                Busqueda precisa
-                                <svg class="w-3.5 h-3.5 ms-2 rtl:rotate-180" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 14 10">
-                                    <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M1 5h12m0 0L9 1m4 4L9 9"/>
-                                </svg>
+                                Ver colaboradores
+                                <svg class="mx-1" xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 36 36"><circle cx="16.86" cy="9.73" r="6.46" fill="#ffffff"/><path fill="#ffffff" d="M21 28h7v1.4h-7z"/><path fill="#ffffff" d="M15 30v3a1 1 0 0 0 1 1h17a1 1 0 0 0 1-1V23a1 1 0 0 0-1-1h-7v-1.47a1 1 0 0 0-2 0V22h-2v-3.58a32.12 32.12 0 0 0-5.14-.42a26 26 0 0 0-11 2.39a3.28 3.28 0 0 0-1.88 3V30Zm17 2H17v-8h7v.42a1 1 0 0 0 2 0V24h6Z"/></svg>
+                            </a>
+                            <a href="/requerimiento/{{Crypt::encrypt($tipo_servicio->id)}}" class="inline-flex justify-center items-center py-3 px-5 text-base font-medium text-center text-white rounded-lg bg-green-700 hover:bg-green-800 focus:ring-4 focus:ring-green-300 dark:focus:ring-green-900">
+                                Solicitar servicio
+                                <svg class="mx-1" xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24"><path fill="#ffffff" d="m13.78 15.3l6 6l2.11-2.16l-6-6zm3.72-5.2c-.39 0-.81-.05-1.14-.19L4.97 21.25l-2.11-2.11l7.41-7.4L8.5 9.96l-.72.7l-1.45-1.41v2.86l-.7.7l-3.52-3.56l.7-.7h2.81l-1.4-1.41l3.56-3.56a2.976 2.976 0 0 1 4.22 0L9.89 5.74l1.41 1.4l-.71.71l1.79 1.78l1.82-1.88c-.14-.33-.2-.75-.2-1.12a3.49 3.49 0 0 1 3.5-3.52c.59 0 1.11.14 1.58.42L16.41 6.2l1.5 1.5l2.67-2.67c.28.47.42.97.42 1.6c0 1.92-1.55 3.47-3.5 3.47"/></svg>
                             </a>
                         </div>
                     </div>
