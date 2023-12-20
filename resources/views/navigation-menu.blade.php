@@ -21,6 +21,9 @@
                         <x-nav-link href="{{ route('inicio') }}" :active="request()->routeIs('inicio')">
                             {{ __('Inicio') }}
                         </x-nav-link>
+                        <x-nav-link href="{{ route('solicitudes') }}" :active="request()->routeIs('solicitudes')">
+                            {{ __('Mis Solicitudes') }}
+                        </x-nav-link>
                     @else
                         <x-nav-link href="{{ route('requerimientos') }}" :active="request()->routeIs('requerimientos')">
                             {{ __('Requerimientos') }}

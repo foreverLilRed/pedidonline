@@ -66,5 +66,7 @@ Route::middleware([
     Route::get('/inicio', function () {
         return view('inicio');
     })->name('inicio');
+
+    Route::get('/solicitudes',[Requerimientos::class,'misSolicitudes'])->name('solicitudes');
 });
 

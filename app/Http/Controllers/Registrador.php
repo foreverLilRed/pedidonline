@@ -14,6 +14,10 @@ class Registrador extends Controller
 {
     public function cliente(Request $request): RedirectResponse
     {
+        if (User::where('email', $request->input('email'))->exists()) {
+            return redirect('/register')->withErrors(['email' => 'Correo electrónico ya registrado']);
+        }
+
         $user = new User();
 
         $user->name = $request->input('name');
@@ -51,6 +55,10 @@ class Registrador extends Controller
 
     public function colaborador(Request $request): RedirectResponse
     {
+        if (User::where('email', $request->input('email'))->exists()) {
+            return redirect('/register')->withErrors(['email' => 'Correo electrónico ya registrado']);
+        }
+        
         $user = new User();
 
         $user->name = $request->input('name');

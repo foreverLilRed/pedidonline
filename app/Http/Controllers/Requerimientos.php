@@ -9,4 +9,8 @@ class Requerimientos extends Controller
     public function listarRequerimientos(){
         return view('requerimientos');
     }
+
+    public function misSolicitudes(){
+        return view('mis_solicitudes');
+    }
 }
