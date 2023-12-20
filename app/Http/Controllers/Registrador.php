@@ -115,6 +115,6 @@ class Registrador extends Controller
 
         $x->etiquetas()->attach($request->input('etiquetas'));
 
-        return redirect('/inicio');
+        return redirect('/requerimientos');
     }
 }

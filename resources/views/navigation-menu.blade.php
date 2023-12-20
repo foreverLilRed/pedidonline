@@ -17,12 +17,15 @@
                     <x-nav-link href="{{ route('panel') }}" :active="request()->routeIs('panel')">
                         {{ __('Panel') }}
                     </x-nav-link>
-                    <x-nav-link href="{{ route('inicio') }}" :active="request()->routeIs('inicio')">
-                        {{ __('Inicio') }}
-                    </x-nav-link>
-                    <x-nav-link href="{{ route('requerimientos') }}" :active="request()->routeIs('requerimientos')">
-                        {{ __('Requerimientos') }}
-                    </x-nav-link>
+                    @if (auth()->user()->cliente)
+                        <x-nav-link href="{{ route('inicio') }}" :active="request()->routeIs('inicio')">
+                            {{ __('Inicio') }}
+                        </x-nav-link>
+                    @else
+                        <x-nav-link href="{{ route('requerimientos') }}" :active="request()->routeIs('requerimientos')">
+                            {{ __('Requerimientos') }}
+                        </x-nav-link>
+                    @endif
                 </div>
             </div>
 
