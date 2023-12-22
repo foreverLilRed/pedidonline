@@ -2,7 +2,9 @@
 
 namespace App\Livewire;
 
+use App\Models\Colaborador;
 use App\Models\Requerimiento;
+use App\Models\Servicio;
 use App\Models\User;
 use Illuminate\Support\Facades\DB;
 use Livewire\Component;
@@ -11,7 +13,11 @@ class Solicitudes extends Component
 {
     public $modal = false;
     public $ofertas = false;
+    public $estado = false;
     public $oferta, $direccion, $descripcion, $requerimiento;
+
+    public $colaborador, $estado_servicio;
+    public $id_servicio;
 
     public function rules() 
     {
@@ -36,6 +42,25 @@ class Solicitudes extends Component
             ->where('id',$this->requerimiento->id)
                 ->update(['monto' => $this->oferta, 'ubicacion' => $this->direccion, 'descripcion' => $this->descripcion]);
         $this->dispatch('requerimiento_editado');
+    }
+
+    public function verEstado($id){
+        $this->estado = true;
+        $this->id_servicio = $id;
+        $this->consultarEstado();
+    }
+
+    public function consultarEstado(){
+        $servicio = Requerimiento::find($this->id_servicio)->servicio;
+        $this->colaborador = $servicio->colaborador->user->name;
+        $this->estado_servicio = $servicio->estado;
+    }
+
+    public function confirmarServicio($id){
+        $servicio = Requerimiento::find($id)->servicio;
+        DB::table('servicio')
+            ->where('id',$servicio->id)
+                ->update(['estado' => 2]);
     }
     public function render()
     {

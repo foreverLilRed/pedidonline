@@ -35,4 +35,9 @@ class Colaborador extends Model
     {
         return $this->HasMany(Servicio::class,'id_colaborador');
     }
+
+    public function ofertas(): HasMany
+    {
+        return $this->HasMany(Oferta::class,'id_colaborador');
+    }
 }

@@ -18,7 +18,7 @@
         </style>
     </head>
     <body class="antialiased">
-        <div class="relative sm:flex sm:justify-center sm:items-center min-h-screen bg-center bg-gray-100 select-none ">
+        <div class="relative sm:flex sm:justify-center sm:items-center min-h-screen dark:bg-slate-500 bg-center bg-gray-100 select-none">
 
             <div class="max-w-7xl mx-auto p-6 lg:p-8">
                 <div class="flex justify-center">

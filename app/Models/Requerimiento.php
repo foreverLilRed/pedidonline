@@ -29,4 +29,9 @@ class Requerimiento extends Model
     {
         return $this->HasOne(Servicio::class,'id_requerimiento');
     }
+
+    public function ofertas(): HasMany
+    {
+        return $this->hasMany(Oferta::class,'id_requerimiento');
+    }
 }

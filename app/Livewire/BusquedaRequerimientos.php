@@ -3,6 +3,7 @@
 namespace App\Livewire;
 
 use App\Models\Colaborador;
+use App\Models\Oferta;
 use App\Models\Requerimiento;
 use App\Models\Servicio;
 use Illuminate\Support\Facades\DB;
@@ -10,7 +11,8 @@ use Livewire\Component;
 
 class BusquedaRequerimientos extends Component
 {
-    public $requerimientos, $colaborador, $servicio;
+    public $requerimientos, $colaborador, $servicio, $oferta;
+    public $modalOferta = false;
 
 
     public function mount(){
@@ -40,6 +42,11 @@ class BusquedaRequerimientos extends Component
         return redirect('/mis-servicios');
 
     }
+
+    public function enviarOferta($id){
+
+    }
+
     public function render()
     {
         return view('livewire.busqueda-requerimientos');
