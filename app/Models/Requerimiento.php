@@ -5,6 +5,7 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Database\Eloquent\Relations\HasOne;
 
 class Requerimiento extends Model
@@ -22,5 +23,10 @@ class Requerimiento extends Model
     public function servicios(): BelongsTo
     {
         return $this->belongsTo(TipoServicio::class,'id_tipo_servicio');
+    }
+
+    public function servicio(): HasOne
+    {
+        return $this->HasOne(Servicio::class,'id_requerimiento');
     }
 }

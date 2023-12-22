@@ -29,12 +29,9 @@ Route::controller(Registrador::class)->group(function () {
     Route::post('/registro-etiquetas/{id}', 'registro_etiquetas')->name('registro-etiquetas');
 });
 
-Route::controller(ServiciosController::class)->group(function () {
-    Route::get('/servicio/{id}', 'mostrarServicio')->name('servicio');
-    Route::get('/colaborador/{nombre}', 'mostrarColaborador')->name('mostrar-colaborador');
-    Route::get('/requerimiento/{id}', 'generarRequerimiento');
-    Route::post('/crear-requerimiento', 'crearRequerimiento')->name('crear-requerimiento');
-});
+Route::get('/panel', function () {
+    return view('panel');
+})->name('panel');
 
 Route::middleware([
     'auth:sanctum',
@@ -45,10 +42,8 @@ Route::middleware([
     Route::get('/dashboard', function () {
         return view('dashboard');
     })->name('dashboard');
-    Route::get('/panel', function () {
-        return view('panel');
-    })->name('panel');
     Route::get('/requerimientos',[Requerimientos::class,'listarRequerimientos'])->name('requerimientos');
+    Route::get('/mis-servicios',[Requerimientos::class,'listarServicios'])->name('mis-servicios');
 });
 
 Route::middleware([
@@ -60,12 +55,16 @@ Route::middleware([
     Route::get('/dashboard', function () {
         return view('dashboard');
     })->name('dashboard');
-    Route::get('/panel', function () {
-        return view('panel');
-    })->name('panel');
     Route::get('/inicio', function () {
         return view('inicio');
     })->name('inicio');
+
+    Route::controller(ServiciosController::class)->group(function () {
+        Route::get('/servicio/{id}', 'mostrarServicio')->name('servicio');
+        Route::get('/colaborador/{nombre}', 'mostrarColaborador')->name('mostrar-colaborador');
+        Route::get('/requerimiento/{id}', 'generarRequerimiento');
+        Route::post('/crear-requerimiento', 'crearRequerimiento')->name('crear-requerimiento');
+    });
 
     Route::get('/solicitudes',[Requerimientos::class,'misSolicitudes'])->name('solicitudes');
 });

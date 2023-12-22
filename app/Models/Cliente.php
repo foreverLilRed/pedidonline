@@ -23,6 +23,7 @@ class Cliente extends Model
 
     public function requerimientos(): HasMany
     {
-        return $this->hasMany(Requerimiento::class);
+        return $this->hasMany(Requerimiento::class,'id_cliente');
     }
+
 }

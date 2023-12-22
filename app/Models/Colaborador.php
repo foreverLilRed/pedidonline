@@ -6,6 +6,7 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\BelongsToMany;
+use Illuminate\Database\Eloquent\Relations\HasMany;
 
 class Colaborador extends Model
 {
@@ -28,5 +29,10 @@ class Colaborador extends Model
     public function etiquetas(): BelongsToMany
     {
         return $this->belongsToMany(Etiqueta::class, 'etiquetas_colaboradores','id_colaborador','id_etiqueta')->withTimestamps()->withPivot('id');
+    }
+
+    public function servicio(): HasMany
+    {
+        return $this->HasMany(Servicio::class,'id_colaborador');
     }
 }
