@@ -16,11 +16,11 @@ class Oferta extends Model
 
     public function requerimiento(): BelongsTo
     {
-        return $this->belongsTo(Requerimiento::class);
+        return $this->belongsTo(Requerimiento::class,'id_requerimiento');
     }
 
     public function colaborador(): BelongsTo
     {
-        return $this->belongsTo(Colaborador::class);
+        return $this->belongsTo(Colaborador::class,'id_colaborador');
     }
 }

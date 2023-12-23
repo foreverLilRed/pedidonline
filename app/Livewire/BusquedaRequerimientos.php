@@ -6,6 +6,7 @@ use App\Models\Colaborador;
 use App\Models\Oferta;
 use App\Models\Requerimiento;
 use App\Models\Servicio;
+use Dotenv\Store\File\Reader;
 use Illuminate\Support\Facades\DB;
 use Livewire\Component;
 
@@ -13,6 +14,7 @@ class BusquedaRequerimientos extends Component
 {
     public $requerimientos, $colaborador, $servicio, $oferta;
     public $modalOferta = false;
+    public $id_requerimiento, $oferta_actual;
 
 
     public function mount(){
@@ -43,8 +45,29 @@ class BusquedaRequerimientos extends Component
 
     }
 
-    public function enviarOferta($id){
+    public function ofertar($id){
+        $this->modalOferta = true;
+        $this->id_requerimiento = $id;
+        $this->mostrarOferta($id);
+    }
 
+    public function mostrarOferta($id){
+        $oferta_actual = Oferta::where('id_requerimiento', $id)
+                                    ->where('id_colaborador', auth()->user()->colaborador->id)
+                                        ->first();
+        $this->oferta_actual = $oferta_actual->oferta_colaborador;
+    }
+
+    public function enviarOferta(){
+        $requerimiento = Requerimiento::find($this->id_requerimiento);
+        $colaborador = Colaborador::find(auth()->user()->colaborador->id);
+        $oferta = new Oferta();
+        $oferta->oferta_colaborador = $this->oferta;
+        $oferta->estado = 0;
+        $oferta->requerimiento()->associate($requerimiento);
+        $oferta->colaborador()->associate($colaborador);
+        $oferta->save();
+        $this->oferta = '';
     }
 
     public function render()

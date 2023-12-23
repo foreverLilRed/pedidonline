@@ -39,7 +39,7 @@
                     </div>
                     <div class="flex flex-row mt-4 gap-x-2">
                         <button type="button" wire:click="crearServicio({{$requerimiento->id}})" class="basis-1/2 focus:outline-none text-white bg-green-700 hover:bg-green-800 focus:ring-4 focus:ring-green-300 font-medium rounded-lg text-sm px-5 py-2.5 dark:bg-green-600 dark:hover:bg-green-700 dark:focus:ring-green-800">Aceptar</button>
-                        <button type="button" wire:click="$set('modalOferta',true)" class="basis-1/2 text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 dark:bg-blue-600 dark:hover:bg-blue-700 focus:outline-none dark:focus:ring-blue-800">Ofertar</button>
+                        <button type="button" wire:click="ofertar({{$requerimiento->id}})" class="basis-1/2 text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 dark:bg-blue-600 dark:hover:bg-blue-700 focus:outline-none dark:focus:ring-blue-800">Ofertar</button>
                     </div>
                 </div>
             @endforeach
@@ -50,14 +50,22 @@
             {{ __('Envia tu oferta') }}
         </x-slot>
         <x-slot name="content">
+            @if (isset($oferta_actual))
+                <p class="text-center text-base font-bold">
+                    Oferta actual
+                </p>
+                <p class="text-center text-6xl">
+                    S/. {{$oferta_actual}}
+                </p>
+            @endif
             <div class="col-span-6 sm:col-span-4">
                 <x-label for="name" value="{{ __('Oferta') }}" />
                 <x-input id="name" type="text" class="mt-1 block w-full" wire:model="oferta" required />
             </div>
         </x-slot>
         <x-slot name="footer">
-            <x-secondary-button class="mx-3" wire:click="ofertar">
-                {{__('Enviar')}}
+            <x-secondary-button class="mx-3" wire:click="enviarOferta">
+                {{__('Hacer oferta')}}
             </x-secondary-button>
         </x-slot>
     </x-dialog-modal>
