@@ -64,9 +64,15 @@
             </div>
         </x-slot>
         <x-slot name="footer">
-            <x-secondary-button class="mx-3" wire:click="enviarOferta">
-                {{__('Hacer oferta')}}
+            @if (isset($oferta_actual))
+            <x-secondary-button class="mx-3" wire:click="editarOferta">
+                {{__('Editar oferta')}}
             </x-secondary-button>
+            @else
+                <x-secondary-button class="mx-3" wire:click="enviarOferta">
+                    {{__('Hacer oferta')}}
+                </x-secondary-button>
+            @endif
         </x-slot>
     </x-dialog-modal>
 </div>

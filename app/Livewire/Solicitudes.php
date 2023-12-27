@@ -3,6 +3,7 @@
 namespace App\Livewire;
 
 use App\Models\Colaborador;
+use App\Models\Oferta;
 use App\Models\Requerimiento;
 use App\Models\Servicio;
 use App\Models\User;
@@ -18,6 +19,7 @@ class Solicitudes extends Component
 
     public $colaborador, $estado_servicio;
     public $id_servicio;
+    public $total_ofertas, $id_oferta;
 
     public function rules() 
     {
@@ -61,6 +63,36 @@ class Solicitudes extends Component
         DB::table('servicio')
             ->where('id',$servicio->id)
                 ->update(['estado' => 2]);
+    }
+
+    public function mostrarOfertas($id){
+        $this->ofertas = true;
+        $this->id_oferta = $id;
+        $this->consultarOfertas();
+    }
+
+    public function consultarOfertas(){
+        $this->total_ofertas = Requerimiento::find($this->id_oferta)->ofertas;
+    }
+
+    public function crearServicio($monto,$id){
+        $oferta = Oferta::find($id);
+        $requerimiento = Requerimiento::find($this->id_oferta);
+        $colaborador = Colaborador::find($oferta->id_colaborador);
+        $servicio = new Servicio();
+        $servicio->monto = $monto;
+        $servicio->descripcion = $requerimiento->descripcion;
+        $servicio->estado = 0;
+        $servicio->id_medio_pago = 1;
+        $servicio->colaborador()->associate($colaborador);
+        $servicio->requerimiento()->associate($requerimiento);
+        $servicio->save();
+
+        DB::table('requerimientos')
+            ->where('id',$requerimiento->id)
+                ->update(['estado' => 1]);
+
+        $this->ofertas = false;
     }
     public function render()
     {

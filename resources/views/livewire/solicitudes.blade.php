@@ -35,7 +35,7 @@
                     @else
                         <div class="flex flex-row mt-4 gap-x-2">
                             <button type="button" wire:click="editarRequerimiento({{$solicitud->id}})" class="py-2.5 w-1/2 px-5 me-2 mb-2 text-sm font-medium text-gray-900 focus:outline-none bg-white rounded-full border border-gray-200 hover:bg-gray-100 hover:text-blue-700 focus:z-10 focus:ring-4 focus:ring-gray-200 dark:focus:ring-gray-700 dark:bg-gray-800 dark:text-gray-400 dark:border-gray-600 dark:hover:text-white dark:hover:bg-gray-700">Editar</button>
-                            <button type="button" wire:click="$set('ofertas',true)" class="text-white w-1/2 bg-gray-800 hover:bg-gray-900 focus:outline-none focus:ring-4 focus:ring-gray-300 font-medium rounded-full text-sm px-5 py-2.5 me-2 mb-2 dark:bg-gray-800 dark:hover:bg-gray-700 dark:focus:ring-gray-700 dark:border-gray-700">Ofertas</button>
+                            <button type="button" wire:click="mostrarOfertas({{$solicitud->id}})" class="text-white w-1/2 bg-gray-800 hover:bg-gray-900 focus:outline-none focus:ring-4 focus:ring-gray-300 font-medium rounded-full text-sm px-5 py-2.5 me-2 mb-2 dark:bg-gray-800 dark:hover:bg-gray-700 dark:focus:ring-gray-700 dark:border-gray-700">Ofertas</button>
                         </div>
                     @endif
                 </div>
@@ -116,16 +116,50 @@
             @endif
         </x-slot>
     </x-dialog-modal>
-    <x-dialog-modal wire:model.live="ofertas" class="p-0">
-        <x-slot name="title">
-            {{ __('Ofertas') }}
-        </x-slot>
-        <x-slot name="content">
-        </x-slot>
-        <x-slot name="footer">
-            <x-secondary-button class="mx-3" wire:click="$set('ofertas',false)">
-                {{__('Salir')}}
-            </x-secondary-button>
-        </x-slot>
-    </x-dialog-modal>
+
+        <x-dialog-modal wire:model.live="ofertas" class="p-0" wire:poll="consultarOfertas">
+            <x-slot name="title">
+                {{ __('Ofertas') }}
+            </x-slot>
+            <x-slot name="content">
+                @if (isset($total_ofertas))
+                    @foreach ($total_ofertas as $oferta)
+                        <div class="flex flex-col">
+                            <div class="rounded-lg shadow-2xl w-full bg-gray-800 my-1.5 p-2 text-white flex items-center flex-row">
+                                <div class="basis-1/2 flex items-center">
+                                    <img class="m-1 rounded-full" style="width: 15%" src="https://th.bing.com/th/id/OIG.BvkqUNIavbVGWO7RsV_F?w=1024&h=1024&rs=1&pid=ImgDetMain" alt="image description">
+                                    <p class="ml-2 font-bold text-xl">
+                                        {{$oferta->colaborador->user->name}}
+                                    </p>
+                                    @if (isset($oferta->colaborador->calificacion))
+                                        <span class="text-sm flex items-center ml-2 px-1 font-extrabold bg-white text-gray-800 rounded dark:bg-gray-700 dark:text-gray-300">
+                                            <p class="mt-0.5 mr-1">{{$oferta->colaborador->calificacion}}</p>
+                                            <svg xmlns="http://www.w3.org/2000/svg" width="15" height="15" viewBox="0 0 24 24"><path fill="#fdd868" d="m12 18.275l-4.15 2.5q-.275.175-.575.15t-.525-.2q-.225-.175-.35-.437t-.05-.588l1.1-4.725L3.775 11.8q-.25-.225-.312-.513t.037-.562q.1-.275.3-.45t.55-.225l4.85-.425l1.875-4.45q.125-.3.388-.45t.537-.15q.275 0 .537.15t.388.45l1.875 4.45l4.85.425q.35.05.55.225t.3.45q.1.275.038.563t-.313.512l-3.675 3.175l1.1 4.725q.075.325-.05.588t-.35.437q-.225.175-.525.2t-.575-.15z"/></svg>
+                                        </span>
+                                    @endif
+                                </div>
+                                <div class="basis-1/2 flex items-center flex-row">
+                                    <div class="basis-1/2 text-center flex items-center">
+                                        <svg xmlns="http://www.w3.org/2000/svg" width="30" height="30" viewBox="0 0 24 24"><path fill="#059669" d="M10.5 8a3 3 0 1 0 0 6a3 3 0 0 0 0-6M9 11a1.5 1.5 0 1 1 3 0a1.5 1.5 0 0 1-3 0M2 7.25A2.25 2.25 0 0 1 4.25 5h12.5A2.25 2.25 0 0 1 19 7.25v7.5A2.25 2.25 0 0 1 16.75 17H4.25A2.25 2.25 0 0 1 2 14.75zm2.25-.75a.75.75 0 0 0-.75.75V8h.75A.75.75 0 0 0 5 7.25V6.5zm-.75 6h.75a2.25 2.25 0 0 1 2.25 2.25v.75h8v-.75a2.25 2.25 0 0 1 2.25-2.25h.75v-3h-.75a2.25 2.25 0 0 1-2.25-2.25V6.5h-8v.75A2.25 2.25 0 0 1 4.25 9.5H3.5zm14-4.5v-.75a.75.75 0 0 0-.75-.75H16v.75c0 .414.336.75.75.75zm0 6h-.75a.75.75 0 0 0-.75.75v.75h.75a.75.75 0 0 0 .75-.75zm-14 .75c0 .414.336.75.75.75H5v-.75a.75.75 0 0 0-.75-.75H3.5zm.901 3.75A2.999 2.999 0 0 0 7 20h10.25A4.75 4.75 0 0 0 22 15.25V10a3 3 0 0 0-1.5-2.599v7.849a3.25 3.25 0 0 1-3.25 3.25z"/></svg>
+                                        <p class="ml-2 mt-0.5 text-lg font-black">
+                                            {{$oferta->oferta_colaborador}}
+                                        </p>
+                                    </div>
+                                    <div class="basis-1/2 text-center">
+                                        <button type="button" wire:click='crearServicio({{$oferta->oferta_colaborador}},{{$oferta->id}})' class="text-white w-2/3 bg-green-700 hover:bg-green-800 focus:ring-green-300 font-medium rounded-full text-sm px-5 py-2.5 text-center dark:bg-green-600 dark:hover:bg-green-700 dark:focus:ring-green-800">Aceptar</button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    @endforeach
+                @else
+                    <p class="text-center mx-auto font-semibold text-lg">Aun no se han recibido ofertas</p>
+                @endif
+            </x-slot>
+            <x-slot name="footer">
+                <x-secondary-button class="mx-3" wire:click="$set('ofertas',false)">
+                    {{__('Salir')}}
+                </x-secondary-button>
+            </x-slot>
+        </x-dialog-modal>
 </div>

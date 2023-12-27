@@ -38,6 +38,6 @@ class Colaborador extends Model
 
     public function ofertas(): HasMany
     {
-        return $this->HasMany(Oferta::class,'id_colaborador');
+        return $this->HasMany(Oferta::class);
     }
 }
