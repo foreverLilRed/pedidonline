@@ -6,7 +6,6 @@ use App\Models\Colaborador;
 use App\Models\Oferta;
 use App\Models\Requerimiento;
 use App\Models\Servicio;
-use Dotenv\Store\File\Reader;
 use Illuminate\Support\Facades\DB;
 use Livewire\Attributes\On;
 use Livewire\Component;
@@ -16,7 +15,6 @@ class BusquedaRequerimientos extends Component
     public $requerimientos, $colaborador, $servicio, $oferta;
     public $modalOferta = false;
     public $id_requerimiento, $oferta_actual;
-
 
     public function mount(){
         $this->colaborador = Colaborador::find(auth()->user()->colaborador->id);

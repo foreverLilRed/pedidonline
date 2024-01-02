@@ -3,6 +3,7 @@
 use App\Http\Controllers\Registrador;
 use App\Http\Controllers\Requerimientos;
 use App\Http\Controllers\ServiciosController;
+use App\Http\Controllers\Ubicacion;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -19,6 +20,16 @@ use Illuminate\Support\Facades\Route;
 Route::get('/', function () {
     return view('welcome');
 });
+
+Route::get('/matrices', function () {
+    return view('matrices');
+});
+
+Route::get('/geocoding',[Ubicacion::class,'mostrarUbicacion']);
+Route::get('/get-user-location',[Ubicacion::class,'getUserLocation']);
+
+Route::get('/geolocation',[Ubicacion::class,'mostrarUbicacionGeolocation']);
+
 
 Route::controller(Registrador::class)->group(function () {
     Route::post('/register-cliente', 'cliente')->name('register-cliente');

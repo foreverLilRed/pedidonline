@@ -19,9 +19,11 @@
                         <div class="absolute inset-y-0 start-0 top-0 flex items-center ps-3.5 pointer-events-none">
                             <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24"><path fill="#000000" d="M12 11.5A2.5 2.5 0 0 1 9.5 9A2.5 2.5 0 0 1 12 6.5A2.5 2.5 0 0 1 14.5 9a2.5 2.5 0 0 1-2.5 2.5M12 2a7 7 0 0 0-7 7c0 5.25 7 13 7 13s7-7.75 7-13a7 7 0 0 0-7-7"/></svg>
                         </div>
-                        <input name="direccion" type="text" id="direccion" aria-describedby="helper-text-explanation" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full ps-10 p-2.5  dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" value="{{auth()->user()->cliente->domicilio}}" required>
+                        <input name="direccion" type="text" id="autocomplete" aria-describedby="helper-text-explanation" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full ps-10 p-2.5  dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" required>
                     </div>
                 </div>
+
+                <div id="map" style="height: 300px; width: 90%; margin: 5%"></div>
 
                 <div class="relative z-0 w-full mb-5 group">
                     <label for="oferta" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Oferta:</label>
@@ -45,3 +47,69 @@
         </div>
     </div>
 </x-app-layout>
+<script>
+    let autocomplete;
+    let map;
+    function initMap(){
+        autocomplete = new google.maps.places.Autocomplete(
+            document.getElementById('autocomplete'),
+            {
+                types: ['address'],
+                componentRestrictions: {'country': ['PE']},
+            }
+        )
+
+        map = new google.maps.Map(document.getElementById('map'), {
+            center: { lat: -6.7713700, lng: -79.8408800 },
+            zoom: 12,
+        });
+
+        map.setOptions({
+            mapTypeControl: false
+        });
+
+        autocomplete.addListener('place_changed', function() {
+            const place = autocomplete.getPlace();
+            console.log(place);
+
+            if (!place.geometry) {
+                console.log("No se encontraron detalles del lugar:", place);
+                return;
+            }
+
+            const latitude = place.geometry.location.lat();
+            const longitude = place.geometry.location.lng();
+            const direccion = place.formatted_address;
+
+            map.setCenter({ lat: latitude, lng: longitude });
+
+            new google.maps.Marker({
+                position: { lat: latitude, lng: longitude },
+                map: map,
+                title: place.name,
+            });
+
+            console.log("Latitud:", latitude);
+            console.log("Longitud:", longitude);
+            console.log("Direccion:", direccion);
+
+            document.getElementById('lat').value = latitude;
+            document.getElementById('lng').value = longitude;
+            document.getElementById('direccion').value = direccion;
+        });
+    }
+
+    document.addEventListener('click', function (event) {
+        const targetElement = event.target;
+
+        if (!targetElement.matches('#autocomplete')) {
+
+            if (autocomplete && !autocomplete.getPlace().geometry) {
+                console.log("No se ha seleccionado un lugar válido");
+            }
+        }
+    });
+</script>
+<script async
+    src="https://maps.googleapis.com/maps/api/js?key=AIzaSyACwJVm_-WdLVJRNOgi62xHweLhP5L2F9I&libraries=places&callback=initMap">
+</script>
