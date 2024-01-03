@@ -65,7 +65,7 @@
 
         </script>
         <script async
-        src="https://maps.googleapis.com/maps/api/js?key=AIzaSyACwJVm_-WdLVJRNOgi62xHweLhP5L2F9I&libraries=places&callback=initMap">
+        src="https://maps.googleapis.com/maps/api/js?key=&libraries=places&callback=initMap">
     </script>
     </div>
 </x-app-layout>

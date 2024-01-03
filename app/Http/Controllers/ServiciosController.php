@@ -43,11 +43,15 @@ class ServiciosController extends Controller
         $estado = 0;
         $ubicacion = $request->input('direccion');
         $descripcion = $request->input('descripcion');
+        $latitud = $request->input('lat');
+        $longitud = $request->input('lng');
 
         $requerimiento->monto = $monto;
         $requerimiento->estado = $estado;
         $requerimiento->ubicacion = $ubicacion;
         $requerimiento->descripcion = $descripcion;
+        $requerimiento->latitud = $latitud;
+        $requerimiento->longitud = $longitud;
         $servicio = TipoServicio::find($request->input('servicio'));
         $requerimiento->servicios()->associate($servicio);
         $cliente = Cliente::find(auth()->user()->cliente->id);

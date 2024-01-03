@@ -1,7 +1,6 @@
 <html>
   <head>
     <title>Distance Matrix Service</title>
-    <script src="https://polyfill.io/v3/polyfill.min.js?features=default"></script>
 
     <script type="module">
         function initMap() {
