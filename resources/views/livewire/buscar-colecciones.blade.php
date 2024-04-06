@@ -1,9 +1,8 @@
 <div>
-
-    <div class="grid grid-cols-4 gap-5">
+    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-5">
         @foreach ($listaColaboradores as $colaborador)
-            <div class="w-full max-w-sm bg-white border rounded-uxl shadow-lg dark:bg-gray-800 dark:border-gray-700 transition-transform duration-300 ease-in-out">
-                <img class="rounded-uxl m-3 w-11/12 mx-auto" src="https://elements-video-cover-images-0.imgix.net/files/ddf31d2a-543c-4182-9ffa-d1a4f6d878ec/inline_image_preview.jpg?auto=compress%2Cformat&h=394&w=700&fit=min&s=104cee012a125e6a1aa53e475c8b8c7a" alt="image description">
+            <div class="w-full max-w-sm mx-auto bg-white border rounded-photo shadow-lg dark:bg-gray-800 dark:border-gray-700 transition-transform duration-300 ease-in-out">
+                <img class="rounded-photo m-3 w-11/12 mx-auto" src="https://elements-video-cover-images-0.imgix.net/files/ddf31d2a-543c-4182-9ffa-d1a4f6d878ec/inline_image_preview.jpg?auto=compress%2Cformat&h=394&w=700&fit=min&s=104cee012a125e6a1aa53e475c8b8c7a" alt="image description">
                 <div class="px-5 pb-5 mt-2">
                     <div class="flex justify-between">
                         <h5 class="text-xl capitalize font-semibold tracking-tight text-gray-900 dark:text-white">
